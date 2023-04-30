@@ -37,7 +37,6 @@
             this.directorLabel = new System.Windows.Forms.Label();
             this.buttonPrevious = new System.Windows.Forms.Button();
             this.buttonNext = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.Film12 = new System.Windows.Forms.GroupBox();
@@ -132,16 +131,6 @@
             this.buttonNext.UseVisualStyleBackColor = true;
             this.buttonNext.Click += new System.EventHandler(this.buttonNext_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(79, 394);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(93, 20);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "Description:";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -210,7 +199,7 @@
             this.watch.Name = "watch";
             this.watch.Size = new System.Drawing.Size(75, 23);
             this.watch.TabIndex = 15;
-            this.watch.Text = "Treiller";
+            this.watch.Text = "Trailer";
             this.watch.UseVisualStyleBackColor = true;
             this.watch.Click += new System.EventHandler(this.watch_Click);
             // 
@@ -221,7 +210,6 @@
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.watch);
             this.Controls.Add(this.Film12);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonNext);
             this.Controls.Add(this.buttonPrevious);
             this.Controls.Add(this.pictureBox1);
@@ -231,7 +219,6 @@
             this.Film12.ResumeLayout(false);
             this.Film12.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -246,7 +233,6 @@
         private System.Windows.Forms.Label directorLabel;
         private System.Windows.Forms.Button buttonPrevious;
         private System.Windows.Forms.Button buttonNext;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox Film12;

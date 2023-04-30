@@ -33,7 +33,6 @@ namespace MovieSearcher
             genreLabel.Text = string.Join(", ", movie.Genre);
             pictureBox1.ImageLocation = findIMG(movie.Title);
             descriptionTextBox.Text = "    " + movie.Description;
-            label1.Text = movie.matches.ToString();
         }
         private string findIMG(string title)
         {
