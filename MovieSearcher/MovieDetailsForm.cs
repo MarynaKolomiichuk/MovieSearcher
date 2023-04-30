@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -28,9 +31,30 @@ namespace MovieSearcher
             yearLabel.Text = movie.Year.ToString();
             actorsLabel.Text = string.Join(", ", movie.Actors);
             genreLabel.Text = string.Join(", ", movie.Genre);
-            pictureBox1.ImageLocation = movie.Image;
+            pictureBox1.ImageLocation = findIMG(movie.Title);
             descriptionTextBox.Text = "    " + movie.Description;
             label1.Text = movie.matches.ToString();
+        }
+        private string findIMG(string title)
+        {
+            string modifiedString = title.Replace(" ", "+");
+            string url = "http://www.omdbapi.com/?t=" + modifiedString + "&apikey=e17f08db";
+            using (WebClient wc = new WebClient() { Encoding = Encoding.UTF8 })
+            {
+                var json = wc.DownloadString(url);
+                var result = JsonConvert.DeserializeObject<ImdbEntity>(json);
+
+                if (result.Response == "True")
+                {
+                    return result.Poster;
+                }
+                else
+                {
+                    return "";
+                }
+
+            }
+
         }
 
         private void buttonPrevious_Click(object sender, EventArgs e)
@@ -48,6 +72,16 @@ namespace MovieSearcher
                 page += 1;
                 SetMovieDetails(films[page]);
             }
+        }
+
+        private void label3_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void watch_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(films[page].ImdbLink);
         }
     }
 

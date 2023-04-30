@@ -26,7 +26,7 @@ namespace MovieSearcher
         public static List<Film> GetFilmsFromFile(string filePath)
         {
             List<Film> films = null;
-
+          
             try
             {
                 using (StreamReader r = new StreamReader(filePath))

@@ -3,12 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Security.Principal;
 using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using Newtonsoft.Json;
+using static System.Net.WebRequestMethods;
 
 namespace MovieSearcher
 {
@@ -19,7 +24,9 @@ namespace MovieSearcher
         public Form1()
         {
             InitializeComponent();
-            _movies = Film.GetFilmsFromFile("C:\\Users\\Vanish\\Desktop\\vlad\\MovieSearcher\\MovieSearcher\\jsconfig1.json");
+            string fileName = "jsconfig1.json";
+            string filePath = Path.Combine(Directory.GetParent(Application.StartupPath).Parent.FullName, fileName);
+            _movies = Film.GetFilmsFromFile(filePath);
         }
 
         private void search_Click(object sender, EventArgs e)
@@ -44,26 +51,25 @@ namespace MovieSearcher
                 foreach (var film in _movies)
                 {
                     if (film.Title == firstUser || film.Title == secondUser) continue;
-                    int firstUserGenres = film.Genre.Intersect(highRatedFilms[0].Genre).Count();
 
-                    int secondUserGenres =  film.Genre.Intersect(highRatedFilms[1].Genre).Count();
-                    int firstUserActors= film.Actors.Intersect(highRatedFilms[0].Actors).Count();
+                    int firstUserGenres = film.Genre.Intersect(highRatedFilms[0].Genre).Count();
+                    int secondUserGenres = film.Genre.Intersect(highRatedFilms[1].Genre).Count();
+                    int firstUserActors = film.Actors.Intersect(highRatedFilms[0].Actors).Count();
                     int secondUserActors = film.Actors.Intersect(highRatedFilms[1].Actors).Count();
                     int max = Math.Max(firstUserGenres + firstUserActors, secondUserGenres + secondUserActors);
                     int min = Math.Min(firstUserGenres + secondUserActors, secondUserGenres + secondUserActors);
                     double score = min + (max - min) / 5.0;
                     film.matches = score;
-                    if (film.matches > 3) MessageBox.Show("More than 4");
                     if (film.matches > 0)
                     {
                         _moviesRated.Add(film);
 
                     }
-                }        
-                    
+                }
 
                 var movieDetailsForm = new MovieDetailsForm();
-                List<Film> sortedFilm = _moviesRated.OrderByDescending(f => f.matches).ToList();
+                List<Film> sortedFilm = _moviesRated.OrderByDescending(f => f.matches).Take(20).ToList();
+
                 movieDetailsForm.films = sortedFilm;
                 movieDetailsForm.SetMovieDetails(sortedFilm[0]);
                 movieDetailsForm.Show();
@@ -75,8 +81,6 @@ namespace MovieSearcher
             {
                 MessageBox.Show("Fields con`t not be empty");
             }
-            listView1.View = View.Details;
-            listView1.Columns.Add("Title", 300);
         }
     }
 }

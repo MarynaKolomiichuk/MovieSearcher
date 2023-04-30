@@ -63,3 +63,5 @@ C:\Users\Vanish\Desktop\vlad\MovieSearcher\MovieSearcher\obj\Debug\MovieSearcher
 C:\Users\Vanish\Desktop\vlad\MovieSearcher\MovieSearcher\obj\Debug\MovieSearcher.exe
 C:\Users\Vanish\Desktop\vlad\MovieSearcher\MovieSearcher\obj\Debug\MovieSearcher.pdb
 C:\Users\Vanish\Desktop\vlad\MovieSearcher\MovieSearcher\obj\Debug\MovieSearcher.MovieDetailsForm.resources
+C:\Users\Vanish\Desktop\vlad\MovieSearcher\MovieSearcher\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Vanish\Desktop\vlad\MovieSearcher\MovieSearcher\bin\Debug\Newtonsoft.Json.xml
