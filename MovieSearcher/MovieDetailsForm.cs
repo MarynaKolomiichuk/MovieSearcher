@@ -29,7 +29,7 @@ namespace MovieSearcher
             actorsLabel.Text = string.Join(", ", movie.Actors);
             genreLabel.Text = string.Join(", ", movie.Genre);
             pictureBox1.ImageLocation = movie.Image;
-            descriptionTextBox.Text = movie.Description;
+            descriptionTextBox.Text = "    " + movie.Description;
             label1.Text = movie.matches.ToString();
         }
 
@@ -48,11 +48,6 @@ namespace MovieSearcher
                 page += 1;
                 SetMovieDetails(films[page]);
             }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 

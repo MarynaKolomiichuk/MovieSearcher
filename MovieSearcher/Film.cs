@@ -12,7 +12,7 @@ namespace MovieSearcher
 {
     public class Film
     {
-        public double matches = 0;
+        public double matches = 0.1;
         public string Title { get; set; }
         public int Year { get; set; }
         public string Director { get; set; }

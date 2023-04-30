@@ -45,13 +45,15 @@ namespace MovieSearcher
                 {
                     if (film.Title == firstUser || film.Title == secondUser) continue;
                     int firstUserGenres = film.Genre.Intersect(highRatedFilms[0].Genre).Count();
+
                     int secondUserGenres =  film.Genre.Intersect(highRatedFilms[1].Genre).Count();
-                    int firstUserActors= film.Genre.Intersect(highRatedFilms[0].Actors).Count();
-                    int secondUserActors = film.Genre.Intersect(highRatedFilms[1].Actors).Count();
+                    int firstUserActors= film.Actors.Intersect(highRatedFilms[0].Actors).Count();
+                    int secondUserActors = film.Actors.Intersect(highRatedFilms[1].Actors).Count();
                     int max = Math.Max(firstUserGenres + firstUserActors, secondUserGenres + secondUserActors);
                     int min = Math.Min(firstUserGenres + secondUserActors, secondUserGenres + secondUserActors);
-                    film.matches = min + (max - min) / 5;
-                    if (film.matches > 4) MessageBox.Show("More than 4");
+                    double score = min + (max - min) / 5.0;
+                    film.matches = score;
+                    if (film.matches > 3) MessageBox.Show("More than 4");
                     if (film.matches > 0)
                     {
                         _moviesRated.Add(film);
@@ -61,8 +63,9 @@ namespace MovieSearcher
                     
 
                 var movieDetailsForm = new MovieDetailsForm();
-                movieDetailsForm.films = _moviesRated.OrderByDescending(f => f.matches).ToList(); ;
-                movieDetailsForm.SetMovieDetails(_moviesRated[0]);
+                List<Film> sortedFilm = _moviesRated.OrderByDescending(f => f.matches).ToList();
+                movieDetailsForm.films = sortedFilm;
+                movieDetailsForm.SetMovieDetails(sortedFilm[0]);
                 movieDetailsForm.Show();
 
                
